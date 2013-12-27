@@ -7,52 +7,39 @@
 #include <stdlib.h>
 #include <math.h>
 /* It Contains the information about each strip */
-typedef struct {
-    long   n,    /* number of students of each strip */
-           *v,   /* vector with money spent by each student, in cents */
-           mean, /* The Mean of the money spent by students */
-           exc;  /* Money exchanged by the students */
+typedef struct _trip {
+    double *v,           /* Vector with the money spent by each person */
+           total,        /* Total spent by all persons */
+           mean;         /* The Mean of all students costs */
+    long n_students;
 } T_Trip;
-
-void T_Trip_mean (T_Trip *trip) {
-    long sum = 0,
-        i;
-    double mean_aux;  /* Mean in floating */
-    for (i = 0; i < trip->n; i++) 
-        sum += trip->v[i];
-    mean_aux = ((double) sum / trip->n ) ;
-    trip->mean =  (long) (mean_aux+0.4);
-}
-
-/* Calculate the money exchanged. All the operations are made with money in cents */
-void T_Trip_exc (T_Trip *trip) {
-    long i,
-         exc_upper = 0,
-         exc_lower = 0;
-    for (i = 0; i < trip->n ; i++)            /* Upper cases */ 
-        if (trip->v[i] > trip->mean) 
-            exc_upper += (trip->v[i] - trip->mean);
-    for (i = 0; i < trip->n ; i++)            /* Lower Cases */
-        if (trip->v[i] < trip->mean)          /* The answer will be the minor value */ 
-            exc_lower += (trip->mean - trip->v[i]);
-    trip->exc = (exc_lower < exc_upper) ? exc_lower : exc_upper;
-}
 
 int main(int argc, const char *argv[])
 {
     T_Trip trip;
-    long i;
-    while ( scanf("%ld", &trip.n) && trip.n != 0 ) {
-        double aux;
-        trip.v = malloc( trip.n * sizeof(long) ); 
-        for (i = 0; i < trip.n; i++) {
-            scanf("%lf", &aux);
-            trip.v[i] = aux * 100 ;        /* converting to cents */
+    long i,n;
+    double differ,      /* Difference between each spent and the mean */
+           exchange;
+    while ( scanf("%ld", &trip.n_students) && trip.n_students != 0 ) {
+        trip.v = malloc(trip.n_students * sizeof(double));
+        trip.total = 0;      
+        double uppersum, lowersum;
+        uppersum = lowersum = 0;
+        for (i = 0; i < trip.n_students; i++) {
+            scanf("%lf", &trip.v[i]);     
+            trip.total += trip.v[i];
         }
-        T_Trip_mean(&trip);
-        T_Trip_exc(&trip);
-        printf("$%.2lf\n", (double) trip.exc/100);
+        trip.mean = trip.total / trip.n_students ;
+        for (i = 0; i < trip.n_students; i++) {
+            differ = (double) (long) ((trip.v[i] - trip.mean) * 100.0) / 100.0;
+            if (differ < 0) lowersum += differ;
+            else uppersum += differ;
+        }
+        exchange = ( -lowersum > uppersum ) ? -lowersum : uppersum;
+        printf("$%.2lf\n", exchange);
+
         free(trip.v);
     }
     return 0;
+
 }
