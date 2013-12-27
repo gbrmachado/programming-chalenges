@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 **
     Problem UVA ID 10189: MineSweeper
     Resolved in C by GOMA.
@@ -54,3 +55,6 @@ Field #2:
 **100
 33200
 1*100
+=======
+
+>>>>>>> b5f47fca1847bb0c882732ce82b1c7b6f7b1f558
