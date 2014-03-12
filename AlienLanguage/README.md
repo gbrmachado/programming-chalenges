@@ -1,7 +1,7 @@
 The Alien Language Problem
 --------------------------
 
-Problem from Google Jam 2009: Qualification Round
+Problem from Google Jam 2009: Qualification Round.<br />
 The Folder "Case_Tests" contains 2 case tests, provided by google.
 
 Problem
@@ -45,7 +45,7 @@ Large dataset
 
 Sample
 ----------
-
+<pre>
 Input                  Output
 3 5 4                  Case #1: 2
 abc                    Case #2: 1
