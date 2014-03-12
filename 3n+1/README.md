@@ -37,9 +37,7 @@ For any two numbers i and j you are to determine the maximum cycle length over a
 The Input
 ------------------
 The input will consist of a series of pairs of integers i and j, one pair of integers per line. All integers will be less than 1,000,000 and greater than 0.
-
 You should process all pairs of integers and for each pair determine the maximum cycle length over all integers between and including i and j.
-
 You can assume that no operation overflows a 32-bit integer.
 The Output
 ---------------
