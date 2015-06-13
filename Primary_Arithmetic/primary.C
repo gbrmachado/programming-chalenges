@@ -1,5 +1,4 @@
 #include <iostream>
-#include <sstream>
 #include <cstring>
 using namespace std;
 
@@ -30,20 +29,25 @@ int numcarry (int v1[10], int v2[10]) {
 }
 
 int main() {
-    int n1[10], n2[10],  //Array of int to represent the numbers
-        v1,v2;           //
+    int n1[10], n2[10];  //Array of int to represent the numbers
     char var1[11], var2[11];
     while (1) {
+        int carries;
         cin >> var1 >> var2;
-        stringstream(var1) >> v1;
-        stringstream(var2) >> v2;
-
         if (strcmp(var1,"0") == 0 && strcmp(var2, "0") == 0) return 0;
-      //  if (v1 == 0 && v2 == 0) return 0;
-
         str2vect(var1,n1);
         str2vect(var2,n2);
-        cout << numcarry (n1,n2)<<endl;
+        carries = numcarry (n1,n2);
+        switch(carries) {
+            case 0:
+                cout << "No carry operation."<<endl;
+                break;
+            case 1:
+                cout << "1 carry operation."<<endl;
+                break;
+            default:
+                cout << carries << " carry operations."<<endl;
+        }
     }
     return 0;
 }
