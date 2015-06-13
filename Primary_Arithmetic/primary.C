@@ -21,7 +21,7 @@ int numcarry (int v1[10], int v2[10]) {
     for (int i = 0; i<10 ; i++) {
         if ( v1[i] + v2[i] + sum >= 10 ) {
             carry++;
-            sum = (v1[i] + v2[i]) % 10;
+            sum = 1;
         }
         else sum = 0;
     }
@@ -51,9 +51,3 @@ int main() {
     }
     return 0;
 }
-        
-
-
-
-
-
